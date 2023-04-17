@@ -39,16 +39,27 @@ class ADroneSim3DCharacter : public ACharacter
 
 public:
 	ADroneSim3DCharacter();
-	
+	UPROPERTY(EditAnywhere, Category = "Thruster")
+	float UpwardThrustPower = 100;
+	UPROPERTY(EditAnywhere, Category = "Thruster")
+	float ForwardThrustPower = 100;
+	UPROPERTY(EditAnywhere, Category = "Thruster")
+	float SideThrustPower = 100;
 
 protected:
 
 	/** Called for movement input */
 	void Move(const FInputActionValue& Value);
-
 	/** Called for looking input */
 	void Look(const FInputActionValue& Value);
-			
+
+	/** Called for jump input*/
+	void Ascend(const FInputActionValue& Value);
+
+	void ForwardThrust(double x = 1);
+	void SideThrust(double x = 1);
+	void UpThrust(double x = 1);
+	void TurnThrust(double x = 1);
 
 protected:
 	// APawn interface
@@ -62,5 +73,8 @@ public:
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 	/** Returns FollowCamera subobject **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
+
+
+
 };
 
